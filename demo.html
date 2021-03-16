@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <title>Document</title>
+</head>
+
+<style>
+    .frame {
+        height: auto;
+        width: 480px;
+        background: linear-gradient( rgba(35, 43, 85, 0.75), rgba(35, 43, 85, 0.95)), url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/clouds-cloudy-forest-mountain.jpg) no-repeat center center;
+        background-size: cover;
+        margin-left: 4%;
+        margin-right: auto;
+        margin-top: 5%;
+        border-top: solid 1px rgba(255, 255, 255, .5);
+        border-radius: 5px;
+        box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: all .5s ease;
+    }
+    
+    li {
+        padding-left: 10px;
+        font-size: 18px;
+        display: inline;
+        text-align: left;
+        text-transform: uppercase;
+        padding-right: 10px;
+        color: #ffffff;
+    }
+    
+    .flight-active a {
+        padding-bottom: 10px;
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: solid 2px #1059FF;
+        transition: all .25s ease;
+        cursor: pointer;
+    }
+    
+    .flight-inactive a {
+        padding-bottom: 0;
+        color: rgba(255, 255, 255, .3);
+        text-decoration: none;
+        border-bottom: none;
+        cursor: pointer;
+    }
+    
+    .hotel-active a {
+        cursor: pointer;
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: solid 2px #1059FF;
+        padding-bottom: 10px;
+    }
+    
+    .hotel-inactive a {
+        cursor: pointer;
+        color: rgba(255, 255, 255, .3);
+        text-decoration: none;
+        transition: all .25s ease;
+    }
+    
+    .form-flight {
+        /* width: 430px; */
+        height: 375px;
+        font-size: 16px;
+        font-weight: 300;
+        padding-left: 37px;
+        padding-right: 37px;
+        padding-top: 15px;
+        transition: opacity .5s ease, transform .5s ease;
+    }
+    
+    .form-flight-left {
+        transform: translateX(-400px);
+        opacity: .0;
+    }
+    
+    .form-hotel {
+        width: 430px;
+        height: 375px;
+        font-size: 16px;
+        font-weight: 300;
+        padding-left: 37px;
+        padding-right: 37px;
+        padding-top: 55px;
+        position: relative;
+        top: -375px;
+        left: 400px;
+        opacity: 0;
+        transition: all .5s ease;
+    }
+    
+    .form-hotel-left {
+        transform: translateX(-399px);
+        opacity: 1;
+    }
+    
+    label {
+        color: white;
+        font-weight: 600;
+    }
+</style>
+
+
+<body>
+    <div class="form">
+        <div class="container">
+            <div class="frame">
+                <div class="nav">
+                    <ul class="links">
+                        <li class="flight-active"><a class="btn">Flight</a></li>
+                        <li class="hotel-inactive"><a class="btn">Hotel </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <form class="form-flight" action="" method="post" name="form">
+                        aaaaaaaa
+                    </form>
+
+                    <form class="form-hotel" action="" method="post" name="form">
+                        bbbbbbbbb
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./scripts/jquery.js"></script>
+<script>
+    $(function() {
+        $(".btn").click(function() {
+            $(".form-flight").toggleClass("form-flight-left");
+            $(".form-hotel").toggleClass("form-hotel-left");
+            $(".frame").toggleClass("frame-long");
+            $(".hotel-inactive").toggleClass("hotel-active");
+            $(".flight-active").toggleClass("flight-inactive");
+            $(".forgot").toggleClass("forgot-left");
+            $(this).removeClass("idle").addClass("active");
+        });
+    });
+
+    $(function() {
+        $(".btn-hotel").click(function() {
+            $(".nav").toggleClass("nav-up");
+            $(".form-hotel-left").toggleClass("form-hotel-down");
+            $(".success").toggleClass("success-left");
+            $(".frame").toggleClass("frame-short");
+        });
+    });
+
+    $(function() {
+        $(".btn-flight").click(function() {
+            $(".btn-animate").toggleClass("btn-animate-grow");
+            $(".welcome").toggleClass("welcome-left");
+            $(".cover-photo").toggleClass("cover-photo-down");
+            $(".frame").toggleClass("frame-short");
+            $(".profile-photo").toggleClass("profile-photo-down");
+            $(".btn-goback").toggleClass("btn-goback-up");
+            $(".forgot").toggleClass("forgot-fade");
+        });
+    });
+</script>
+
+</html>

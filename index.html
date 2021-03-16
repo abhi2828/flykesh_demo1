@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flykash</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mdb.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+</head>
+<style>
+    p,
+    a {
+        text-transform: capitalize;
+    }
+    
+    li.item_line {
+        width: 80px;
+        border-right: 1px solid white;
+        margin: 0 8px;
+    }
+    
+    div#navbarContent {
+        justify-content: flex-end;
+    }
+    
+    .navbar.navbar-dark .breadcrumb .nav-item .nav-link:hover,
+    .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+        color: #75c5ff;
+        font-weight: 700;
+    }
+    
+    .navbar.navbar-dark .breadcrumb .nav-item .nav-link,
+    .navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+        color: #fff;
+        transition: .35s;
+        font-weight: 700;
+    }
+    
+    .search_box_bg {
+        background: #0029399e;
+    }
+    
+    .banner_img {
+        background: url(img/bg3.jpg) no-repeat center center;
+        position: relative;
+        height: 100vh;
+        background-size: cover;
+    }
+    
+    input#From {
+        color: #ffffff;
+    }
+    
+    .form {
+        width: 100%;
+    }
+    
+    div#show-me-three,
+    div#show-me-two {
+        display: none;
+    }
+    
+    .direct_flight {
+        color: #ffffff;
+        margin-left: 30px;
+    }
+    
+    .col-md-12.show_flight {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .container.background_form {
+        background: #002939ab;
+    }
+    
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 15px 30px;
+    }
+    
+    section {
+        width: 100%;
+        min-height: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+    
+    section::before {
+        width: 30px;
+        height: 30px;
+        background: var(--primary);
+        clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        top: 18px;
+        left: 18px;
+    }
+    
+    section::after {
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--primary);
+        top: 11px;
+        left: 11px;
+    }
+    
+    .dark {
+        --primary: red;
+        --other: hsl(0, 0%, 90%);
+        padding-bottom: 20px;
+    }
+    
+    .radio_btn {
+        display: flex;
+    }
+    
+    label {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        margin: 12px 30px;
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .input_lable input {
+        opacity: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+    
+    .design {
+        width: 25px;
+        height: 25px;
+        border: 1px solid var(--other);
+        border-radius: 100%;
+        margin-right: 16px;
+        position: relative;
+    }
+    
+    .design::before,
+    .design::after {
+        content: "";
+        display: block;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        position: absolute;
+        transform: scale(0);
+        transform-origin: center center;
+    }
+    
+    .design:before {
+        background: var(--other);
+        opacity: 0;
+        transition: .3s;
+    }
+    
+    .design::after {
+        background: var(--primary);
+        opacity: .4;
+        transition: .6s;
+    }
+    
+    .text {
+        color: var(--other);
+        font-weight: bold;
+    }
+    
+    .input_lable input:checked+.design::before {
+        opacity: 1;
+        transform: scale(.6);
+        left: -1.01px;
+        top: -1.01px;
+    }
+    
+    .input_lable input:hover+.design,
+    .input_lable input:focus+.design {
+        border: 1px solid var(--primary);
+    }
+    
+    .input_lable input:hover+.design:before,
+    .input_lable input:focus+.design:before {
+        background: var(--primary);
+    }
+    
+    .input_lable input:hover~.text,
+    .input_lable input:focus~.text {
+        color: var(--primary);
+    }
+    
+    .input_lable input:focus+.design::after,
+    .input_lable input:active+.design::after {
+        opacity: .1;
+        transform: scale(2.6);
+    }
+    
+    .abs-site-link {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        color: hsla(0, 0%, 0%, .6);
+        background: hsla(0, 0%, 98%, .6);
+        font-size: 16px;
+    }
+    
+    span.form-label {
+        color: white;
+    }
+    
+    .col-md-6.show_flight {
+        margin-top: 15px;
+    }
+    
+    .form-check {
+        position: relative;
+        display: block;
+        padding-left: 1.25rem;
+        top: 18px;
+    }
+    
+    button.flight_abhay_search {
+        top: 10px;
+        margin: .375rem;
+        text-transform: uppercase;
+        word-wrap: break-word;
+        white-space: normal;
+        cursor: pointer;
+        border: 0;
+        border-radius: .125rem;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        padding: .84rem 2.14rem;
+        font-size: .81rem;
+    }
+    
+    .wow .img1 {
+        vertical-align: middle;
+        border-style: none;
+        width: 100px;
+    }
+    
+    .wow .img2 {
+        vertical-align: middle;
+        border-style: none;
+        width: 152px;
+        margin-top: 30px;
+    }
+    
+    .form-check-label {
+        margin-bottom: 0;
+        color: white !important;
+    }
+    
+    h2,
+    .h4 {
+        text-transform: uppercase;
+        color: #096386;
+    }
+    /* footer */
+    
+    .footer-text p {
+        margin-bottom: 14px;
+        font-size: 14px;
+        color: #000000;
+        text-align: center;
+    }
+    
+    .footer-social-icon span {
+        color: #fff;
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 20px;
+    }
+    
+    .footer-social-icon a {
+        color: #fff;
+        font-size: 16px;
+        margin-right: 15px;
+    }
+    
+    .footer-social-icon i {
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 38px;
+        border-radius: 50%;
+    }
+    
+    .facebook-bg {
+        background: #3B5998;
+    }
+    
+    .twitter-bg {
+        background: #55ACEE;
+    }
+    
+    .google-bg {
+        background: #DD4B39;
+    }
+    
+    .footer-widget-heading h3 {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    
+    .OurServicesHeading h3::before {
+        left: 94px !important;
+    }
+    
+    .footer-widget-heading h3::before {
+        content: "";
+        position: absolute;
+        left: 53px;
+        bottom: -15px;
+        height: 2px;
+        width: 50px;
+        background: white;
+    }
+    
+    .footer-widget ul li {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 2px;
+        padding-left: 30px;
+    }
+    
+    .OurServices li {
+        padding-left: 98px !important;
+    }
+    
+    .footer-widget ul li a:hover {
+        color: white;
+    }
+    
+    .footer-widget ul li a {
+        color: #002939;
+        text-transform: capitalize;
+    }
+    
+    .subscribe-form {
+        position: relative;
+        overflow: hidden;
+        padding: 0 277px;
+    }
+    
+    .subscribe-form input {
+        width: 100%;
+        padding: 14px 28px;
+        background: #fffbfb;
+        border: 1px solid #2f3e54;
+        color: #fff;
+        height: 55px;
+        border-radius: 10px;
+    }
+    
+    .subscribe-form button {
+        position: absolute;
+        right: 24%;
+        background: #2f3e54;
+        padding: 13px 20px;
+        border: 1px solid #2f3e54;
+        top: 0;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    
+    .subscribe-form button i {
+        color: white;
+        font-size: 22px;
+        transform: rotate(-6deg);
+    }
+    
+    .copyright-area {
+        background: white;
+        padding: 25px 0;
+    }
+    
+    .copyright-text p {
+        margin: 0;
+        font-size: 14px;
+        color: #5f6060;
+    }
+    
+    .copyright-text p a {
+        color: white;
+    }
+    
+    .footer-menu li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+    
+    .footer-menu li:hover a {
+        color: white;
+    }
+    
+    .footer-menu li a {
+        font-size: 14px;
+        color: #002939;
+    }
+    
+    footer {
+        background: #002939;
+    }
+    
+    img.dowloadlink {
+        width: 90px;
+    }
+    
+    .dowloadlink_heading h3::before {
+        left: 90px !important;
+    }
+    
+    .payment_option_icon {
+        font-size: 30px;
+    }
+    
+    .text-white {
+        color: #908d8d!important;
+    }
+    
+    .page-content {
+        margin-top: 30px;
+    }
+    
+    .footer-widget-heading {
+        text-align: center;
+        padding-left: 64px;
+    }
+    
+    .footer-widget ul li a {
+        color: #d6cfcf;
+        text-transform: capitalize;
+    }
+    
+    img.card-img-top {
+        height: 205px;
+    }
+    
+    .news {
+        text-align: center;
+    }
+</style>
+
+<body id="top">
+    <header>
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img src="./img/Logo.png" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item item_line"><a class="nav-link active" href="#flight">flight</a></li>
+                        <li class="nav-item item_line"><a class="nav-link" href="#hotel">hotel</a></li>
+                        <li class="nav-item item_line"><a class="nav-link" href="#holidays">holidays</a></li>
+                        <li class="nav-item item_line"><a class="nav-link" href="#shikara">shikara</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Intro Section-->
+
+        <section class="banner_img">
+            <div class="container-fluid">
+                <div class="card wow fadeInUp" data-wow-delay=".4s">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 search_box_bg">
+                                <div class="background_form">
+                                    <section class="dark">
+                                        <div class="radio_btn">
+                                            <label class="input_lable">
+                                    <input id='watch-me' type="radio" name="dark" value="One_way" checked>
+                                    <span class="design"></span>
+                                    <span class="text One_way">One way</span>
+                                  </label>
+
+                                            <label class="input_lable">
+                                    <input id='see-me' type="radio" name="dark" value="Roundtrip">
+                                    <span class="design"></span>
+                                    <span class="text Roundtrip">Roundtrip</span>
+                                  </label>
+
+                                            <label class="input_lable">
+                                    <input id='look-me' type="radio" name="dark" value="multi_city">
+                                    <span class="design"></span>
+                                    <span class="text multi_city">Multi-City</span>
+                                  </label>
+                                        </div>
+                                        <br><br>
+                                        <div id='show-me' class="form">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Flying from</span>
+                                                        <input class="form-control" type="text" placeholder="City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Flyning to</span>
+                                                        <input class="form-control" type="text" placeholder="City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Departing</span>
+                                                        <input class="form-control form-control-date" type="date" style="text-transform: lowercase;" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Returning</span>
+                                                        <input class="form-control form-control-date" type="date" style="text-transform: lowercase;" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Adults (12+ yrs)</span>
+                                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Children (2 - 12 yrs)</span>
+                                                        <select class="form-control">
+                                                <option>Children</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Infant (0 - 24 Month)</span>
+                                                        <select class="form-control">
+                                                <option>Infant</option>
+                                                <option>1</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Travel class</span>
+                                                        <select class="form-control form-control2">
+                                                <option>Economy class</option>
+                                                <option>Business class</option>
+                                                <option>First class</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 show_flight">
+                                                    <div class="form-inline">
+                                                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                                            <label class="custom-control-label" for="customControlInline"> <span class="direct_flight">Direct Flight</span></label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-danger my-1">Show flights</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id='show-me-two' class="form">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Flying from</span>
+                                                        <input class="form-control" type="text" placeholder="City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Flyning to</span>
+                                                        <input class="form-control" type="text" placeholder="City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Departing</span>
+                                                        <input class="form-control form-control-date" type="date" style="text-transform: lowercase;" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Returning</span>
+                                                        <input class="form-control form-control-date" type="date" style="text-transform: lowercase;" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Adults (12+ yrs)</span>
+                                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Children (2 - 12 yrs)</span>
+                                                        <select class="form-control">
+                                                <option>Children</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Infant (0 - 24 Month)</span>
+                                                        <select class="form-control">
+                                                <option>Infant</option>
+                                                <option>1</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Travel class</span>
+                                                        <select class="form-control form-control2">
+                                                <option>Economy class</option>
+                                                <option>Business class</option>
+                                                <option>First class</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 show_flight">
+                                                    <div class="col-auto">
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                                            <label class="form-check-label" for="autoSizingCheck" style="color: white;margin: 12px 15px;">
+                                                        Direct Flight
+                                                      </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <!-- <button type="submit" class="btn btn-primary mb-2 flight_abhay_search ">Flight</button> -->
+                                                        <button type="submit" class="btn btn-danger my-1 flight_abhay_search">Show flights</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id='show-me-three' class="form">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">from</span>
+                                                        <input class="form-control" type="text" placeholder="Enter City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">to</span>
+                                                        <input class="form-control" type="text" placeholder="Enter Destination City or airport">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Departing</span>
+                                                        <input class="form-control form-control-date" type="date" style="text-transform: lowercase;" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Adults (12+ yrs)</span>
+                                                        <select class="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Children (2 - 12 yrs)</span>
+                                                        <select class="form-control">
+                                                <option>Children</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Infant (0 - 24 Month)</span>
+                                                        <select class="form-control">
+                                                <option>Infant</option>
+                                                <option>1</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Travel class</span>
+                                                        <select class="form-control form-control2">
+                                                <option>Economy class</option>
+                                                <option>Business class</option>
+                                                <option>First class</option>
+                                                </select>
+                                                        <span class="select-arrow"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 show_flight">
+                                                    <div class="col-auto">
+                                                        <div class="form-group">
+                                                            <span class="form-label">Preferred Airline</span>
+                                                            <input class="form-control" type="text" placeholder="Enter Preferred Airline">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                                            <label class="form-check-label" for="autoSizingCheck" style="color: white;margin: 12px 15px;">
+                                                      Direct Flight
+                                                    </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <!-- <button type="submit" class="btn btn-danger mb-2 flight_abhay_search">Flight</button> -->
+                                                        <button type="submit" class="btn btn-danger my-1 flight_abhay_search">Show flights</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Preferred Airline</span>
+                                                        <input class="form-control" type="text" placeholder="Enter Preferred Airline">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 show_flight">
+                                                    <div class="form-inline">
+                                                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                                            <label class="custom-control-label" for="customControlInline"> <span class="direct_flight">Direct Flight</span></label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-danger my-1">Show flights</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4 ">
+                            <ul class="list-unstyled text-center ">
+                                <li class="mt-4 "><i class="fa fa-map-marker indigo-text fa-2x "></i>
+                                    <p class="mt-2 ">140, City Center, New York, U.S.A</p>
+                                </li>
+                                <li class="mt-4 "><i class="fa fa-phone indigo-text fa-2x "></i>
+                                    <p class="mt-2 ">+ 01 234 567 89</p>
+                                </li>
+                                <li class="mt-4 "><i class="fa fa-envelope indigo-text fa-2x "></i>
+                                    <p class="mt-2 ">contact@company.com</p>
+                                </li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <div id="content ">
+        <!-- <section class="row no-gutters " id="features ">
+            <div class="col-lg-3 col-md-6 col-sm-12 deep-purple lighten-1 text-white ">
+                <div class="p-5 text-center wow zoomIn " data-wow-delay=".1s "><i class="fa fa-line-chart fa-2x "></i>
+                    <div class="h5 mt-3 ">Agile Frameworks</div>
+                    <p class="mt-5 ">Leverage agile frameworks to provide a robust synopsis for high level overviews.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 purple lighten-1 text-white ">
+                <div class="p-5 text-center wow zoomIn " data-wow-delay=".3s "><i class="fa fa-industry fa-2x "></i>
+                    <div class="h5 mt-3 ">Corporate Strategy</div>
+                    <p class="mt-5 ">Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 teal lighten-1 text-white ">
+                <div class="p-5 text-center wow zoomIn " data-wow-delay=".5s "><i class="fa fa-users fa-2x "></i>
+                    <div class="h5 mt-3 "> Workplace Diversity</div>
+                    <p class="mt-5 ">Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 light-blue lighten-1 text-white ">
+                <div class="p-5 text-center wow zoomIn " data-wow-delay=".7s "><i class="fa fa-bullhorn fa-2x "></i>
+                    <div class="h5 mt-3 "> Survival Strategies</div>
+                    <p class="mt-5 ">Bring to the table win-win survival strategies to ensure proactive domination.</p>
+                </div>
+            </div>
+        </section> -->
+
+        <section class="text-center py-5 grey lighten-4 " id="about ">
+            <div class="container-fluid ">
+                <div class="wow fadeIn ">
+                    <h2 class="h1 pt-5 pb-3 ">WHY BOOK WITH US</h2>
+                    <p class="px-5 mb-5 pb-3 lead blue-grey-text ">
+                        Your time is important. When you choose Nordic Visitor, we dedicate time to organising a first-rate experience using our regional knowledge, so you can spend your own time however you please. And once you are travelling, each day of your personalised
+                        itinerary is set up to be memorable.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="text-center py-5 grey lighten-4 " id="about ">
+            <div class="container-fluid ">
+                <div class="row ">
+                    <div class="col-md-4 mb-5 wow fadeInUp " data-wow-delay=".3s "><img class="img1" src="./img/personal.png" alt="quality">
+                        <h3 class="h4 mt-3 ">Personal</h3>
+                        <p class="mt-3 blue-grey-text ">
+                            We operate on a first name basis here. You will have your own custom-made itinerary and a dedicated travel consultant who will serve as your point of contact before, during and after your trip. </p>
+                    </div>
+                    <div class="col-md-4 mb-5 wow fadeInUp " data-wow-delay=".4s "><img class="img2" src="./img/trust-icon.jpg" alt="trust">
+                        <h3 class="h4 mt-3 ">Trust</h3>
+                        <p class="mt-3 blue-grey-text ">
+                            Travel in confidence! Nordic Visitor is fully licensed by the Icelandic Tourist Board and is a member of various professional associations. We’re also highly rated on Tripadvisor by our travellers.
+                        </p>
+                    </div>
+                    <div class="col-md-4 mb-5 wow fadeInUp " data-wow-delay=".5s "><img class="img1" src="./img/quality.png" alt="quality">
+                        <h3 class="h4 mt-3 ">QUALITY</h3>
+                        <p class="mt-3 blue-grey-text ">
+                            Nordic Visitor is certified by Vakinn, the official quality label for Icelandic tourism, and our commitment to professional staff development has been recognised with an education award in Iceland.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section class="py-5 " id="projects ">
+            <div class="container ">
+                <div class="wow fadeIn ">
+                    <h2 class="text-center h1 my-4 ">COVID Information Hub</h2>
+                    <p class="px-5 mb-5 pb-3 lead blue-grey-text text-center ">
+                        Here you can find everything you need to know about planning and enjoying travel in these times.
+                    </p>
+                </div>
+                <div class="row wow fadeInLeft " data-wow-delay=".3s ">
+                    <div class="col-lg-6 col-xl-5 pr-lg-5 pb-5 "><img class="img-fluid rounded z-depth-2 " src="img/kuala-lumpur.jpg " alt="project image " /></div>
+                    <div class="col-lg-6 col-xl-7 pl-lg-5 pb-4 ">
+                        <div class="row mb-3 ">
+                            <div class="col-1 mr-1 "><i class="fa fa-book fa-2x cyan-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Education</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ">
+                            <div class="col-1 mr-1 "><i class="fa fa-code fa-2x red-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Technology</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-1 mr-1 "><i class="fa fa-money fa-2x deep-purple-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Finance</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row pt-5 wow fadeInRight " data-wow-delay=".3s ">
+                    <div class="col-lg-6 col-xl-7 mb-3 ">
+                        <div class="row mb-3 ">
+                            <div class="col-1 mr-1 "><i class="fa fa-bar-chart fa-2x indigo-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Marketing</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ">
+                            <div class="col-1 mr-1 "><i class="fa fa-music fa-2x pink-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Entertainment</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ">
+                            <div class="col-1 mr-1 "><i class="fa fa-smile-o fa-2x blue-text "></i></div>
+                            <div class="col-10 ">
+                                <h5 class="font-weight-bold ">Communication</h5>
+                                <p class="grey-text ">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda voluptate velit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5 mb-3 "><img class="img-fluid rounded z-depth-2 " src="img/san-francisco.jpg " alt="project image " /></div>
+                </div>
+            </div>
+        </section> -->
+        <section class="py-5 " id="team ">
+            <div class="container ">
+                <div class="wow fadeIn ">
+                    <h2 class="h1 pt-5 pb-3 text-center ">Our place of attraction</h2>
+                    <p class="px-5 mb-5 pb-3 lead text-center blue-grey-text ">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+                    </p>
+                </div>
+                <div class="row mb-lg-4 center-on-small-only ">
+                    <div class="col-lg-6 col-md-12 mb-5 wow fadeInLeft " data-wow-delay=".3s ">
+                        <div class="col-md-6 float-left "><img class="img-fluid rounded z-depth-1 mb-3 " src="img/slider1.jpg " alt="team member " /></div>
+                        <div class="col-md-6 float-right ">
+                            <div class="h4 ">Place1</div>
+                            <h6 class="font-weight-bold blue-grey-text mb-4 ">India</h6>
+                            <p class="grey-text ">Kerala, a very prominent state in India, known as the “God's Own Country” is a coastal state.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-5 wow fadeInRight " data-wow-delay=".3s ">
+                        <div class="col-md-6 float-left "><img class="img-fluid rounded z-depth-1 mb-3 " src="img/slider2.jpg " alt="team member " /></div>
+                        <div class="col-md-6 float-right ">
+                            <div class="h4 ">Place2</div>
+                            <h6 class="font-weight-bold blue-grey-text mb-4 ">India</h6>
+                            <p class="grey-text ">Kerala, a very prominent state in India, known as the “God's Own Country” is a coastal state.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row center-on-small-only ">
+                    <div class="col-lg-6 col-md-12 mb-5 wow fadeInLeft " data-wow-delay=".3s ">
+                        <div class="col-md-6 float-left "><img class="img-fluid rounded z-depth-1 mb-3 " src="img/slider3.jpg " alt="team member " /></div>
+                        <div class="col-md-6 float-right ">
+                            <div class="h4 ">Place3</div>
+                            <h6 class="font-weight-bold blue-grey-text mb-4 ">India</h6>
+                            <p class="grey-text ">Kerala, a very prominent state in India, known as the “God's Own Country” is a coastal state.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-5 wow fadeInRight " data-wow-delay=".3s ">
+                        <div class="col-md-6 float-left "><img class="img-fluid rounded z-depth-1 mb-3 " src="img/slider4.jpg " alt="team member " /></div>
+                        <div class="col-md-6 float-right ">
+                            <div class="h4 ">Place4</div>
+                            <h6 class="font-weight-bold blue-grey-text mb-4 ">India</h6>
+                            <p class="grey-text ">Kerala, a very prominent state in India, known as the “God's Own Country” is a coastal state.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-5 " id="projects ">
+            <div class="container ">
+                <div class="wow fadeIn ">
+                    <h2 class="text-center h1 my-4 ">Important Notice</h2>
+                    <p class="px-5 mb-5 pb-3 lead blue-grey-text text-center ">
+                        Here you can find everything you need to know about planning and enjoying travel in these times.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <p class="text " style="font-size: 18px; ">
+                            <marquee direction="left ">
+                                <p style="color: #096386 !important ">For flights which have been cancelled, we have protected your booking... Customers who have booked their travel through a travel agent/online portal are requested to connect with the travel agent directly to redeem their
+                                    credit note.
+                                </p>
+                            </marquee>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="footer-section " style="margin-top: 15px; ">
+        <div class="container-fluid ">
+            <div class="footer-content pt-3 pb-3 ">
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-3 mb-50 ">
+                        <div class="footer-widget ">
+                            <div class="footer-widget-heading OurServicesHeading ">
+                                <h3>Our Services</h3>
+                            </div>
+                            <ul class="OurServices ">
+                                <li><a href="# ">International Holidays</a></li>
+                                <li><a href="# ">Indian Holidays</a></li>
+                                <li><a href="# ">Religious Packages</a></li>
+                                <li><a href="# ">Historical Packages</a></li>
+                                <li><a href="# ">Weekend Getaways</a></li>
+                                <li><a href="# ">Honeymoon Packages</a></li>
+                                <li><a href="# ">Passport</a></li>
+                                <li><a href="# ">Visa</a></li>
+                                <li><a href="# ">Book Hotels</a></li>
+                                <li><a href="# ">Book Flights</a></li>
+                                <li><a href="# ">Travel Insurance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 ">
+                        <div class="row ">
+                            <div class="col-xl-3 col-lg-3 mb-50 ">
+                                <div class="footer-widget ">
+                                    <div class="footer-widget-heading ">
+                                        <h3>Indian Holidays</h3>
+                                    </div>
+                                    <ul>
+                                        <li><a href="# ">Andaman Packages</a></li>
+                                        <li><a href="# ">Kashmir Packages</a></li>
+                                        <li><a href="# ">South Packages</a></li>
+                                        <li><a href="# ">North Packages</a></li>
+                                        <li><a href="# ">Kerala Packages</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 mb-30 ">
+                                <div class="footer-widget ">
+                                    <div class="footer-widget-heading ">
+                                        <h3>International Holidays</h3>
+                                    </div>
+                                    <ul>
+                                        <li><a href="# ">Dubai Packages</a></li>
+                                        <li><a href="# ">Singapore Packages</a></li>
+                                        <li><a href="# ">Mauritius Packages</a></li>
+                                        <li><a href="# ">Thailand Packages</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 mb-50 ">
+                                <div class="footer-widget ">
+                                    <div class="footer-widget-heading ">
+                                        <h3>Ashok Travel World</h3>
+                                    </div>
+                                    <ul>
+                                        <li><a href="# ">About Us</a></li>
+                                        <li><a href="# ">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 mb-30 ">
+                                <div class="footer-widget ">
+                                    <div class="footer-widget-heading ">
+                                        <h3>About The Site</h3>
+                                    </div>
+                                    <ul>
+                                        <li><a href="# ">Privacy Policy</a></li>
+                                        <li><a href="# ">Terms & Condition</a></li>
+                                        <li><a href="# ">Refund & Cancellation Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row " style="margin-top: 45px;padding-left: 30px; ">
+                            <div class="col-md-4 off-set-4" style="color: white; ">
+                                <div class="footer-widget ">
+                                    <div class="footer-widget-heading dowloadlink_heading ">
+                                        <h3>Download App</h3>
+                                    </div>
+                                    <ul style="display: flex; ">
+                                        <li>
+                                            <a href="# "><img class="dowloadlink " style="width:150px;" src="./img/dowloadlink1.svg " alt="dowloadlink1 "></a>
+                                        </li>
+                                        <li>
+                                            <a href="# "><img class="dowloadlink " style="margin-left: -50px;width:150px; " src="./img/dowloadlink2.svg " alt="dowloadlink2 "></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="page-footer indigo darken-2 center-on-small-only pt-0 mt-0 ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-md-12 ">
+                    <div class="mb-5 flex-center "><a class="px-3 " href="# "><i class="fa fa-facebook fa-lg white-text "></i></a><a class="px-3 " href="# "><i class="fa fa-twitter fa-lg white-text "></i></a><a class="px-3 " href="# "><i class="fa fa-google-plus
+                                                        fa-lg white-text "></i></a>
+                        <a class="px-3 " href="# "><i class="fa fa-linkedin fa-lg white-text "></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3 font-small ">
+            <div class="container-fluid ">
+                <div>
+                    <p style="color: white; ">Copyright &copy; 2021, All Right Reserved
+                        <a href="# "></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript " src="scripts/jquery.min.js "></script>
+    <script type="text/javascript " src="scripts/popper.min.js "></script>
+    <script type="text/javascript " src="scripts/bootstrap.min.js "></script>
+    <script type="text/javascript " src="scripts/wow.min.js "></script>
+    <script type="text/javascript " src="scripts/mdb.min.js "></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#watch-me").click(function() {
+                $("#show-me:hidden").show('slow');
+                $("#show-me-two").hide();
+                $("#show-me-three").hide();
+            });
+            $("#watch-me").click(function() {
+                if ($('watch-me').prop('checked') === false) {
+                    $('#show-me').hide();
+                }
+            });
+
+            $("#see-me").click(function() {
+                $("#show-me-two:hidden").show('slow');
+                $("#show-me").hide();
+                $("#show-me-three").hide();
+            });
+            $("#see-me").click(function() {
+                if ($('see-me-two').prop('checked') === false) {
+                    $('#show-me-two').hide();
+                }
+            });
+
+            $("#look-me").click(function() {
+                $("#show-me-three:hidden").show('slow');
+                $("#show-me").hide();
+                $("#show-me-two").hide();
+            });
+            $("#look-me").click(function() {
+                if ($('see-me-three').prop('checked') === false) {
+                    $('#show-me-three').hide();
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
